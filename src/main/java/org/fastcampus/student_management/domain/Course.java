@@ -1,7 +1,5 @@
 package org.fastcampus.student_management.domain;
 
-import org.fastcampus.student_management.application.course.dto.CourseInfoDto;
-
 public class Course {
   private final Student student;
   private final String courseName;
@@ -9,17 +7,16 @@ public class Course {
   private final DayOfWeek dayOfWeek;
   private final Long courseTime;
 
-  // ❕도메인 레이어에서 서비스 레이어를 의존하고 있게 되어버림
-  public Course(Student student, CourseInfoDto courseInfoDto) {
+  public Course(Student student, String courseName, int fee, DayOfWeek dayOfWeek, Long courseTime) {
     if (student == null) {
       throw new IllegalArgumentException("학생은 필수 입력값입니다.");
     }
 
     this.student = student;
-    this.courseName = courseInfoDto.getCourseName();
-    this.fee = new CourseFee(courseInfoDto.getFee());
-    this.dayOfWeek = courseInfoDto.getDayOfWeek();
-    this.courseTime = courseInfoDto.getCourseTime();
+    this.courseName = courseName;
+    this.fee = new CourseFee(fee);
+    this.dayOfWeek = dayOfWeek;
+    this.courseTime = courseTime;
   }
 
   public String getCourseName() {
